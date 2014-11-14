@@ -2,7 +2,7 @@
 
 bool getBit (int data, int pos) {
 	int mask = 1 << (pos - 1);
-	return (data & mask) ? true : false;
+	return data & mask;
 }
 
 void setBit (int * const data, int pos, bool value) {
