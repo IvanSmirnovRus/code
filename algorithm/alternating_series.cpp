@@ -3,37 +3,6 @@
 #include <algorithm>
 #include <iterator>
 
-/*
-void GetMaxAlternatingSeries(const std::vector<int>& series, std::vector<int>* alternatingSeries) {
-    if(!series.size()) {
-        return;
-    }
-    if(series.size() == 1) {
-        *alternatingSeries = series;
-    }
-    bool positive;
-    std::vector<int> groupBegins;
-    std::vector<int>::const_iterator itSeries;
-
-    for (itSeries = series.begin(); itSeries != std::prev(series.end()); ++itSeries) {
-        if (*itSeries - *std::next(itSeries) > 0) {
-            mask.push_back(1);
-        } else {
-            if (*itSeries - *std::next(itSeries) < 0) {
-                mask.push_back(0);  
-            }
-            else {
-                mask.push_back(mask.back());
-            }
-        }
-    } 
-    std::copy(mask.begin(), mask.end(), std::ostream_iterator<int>(std::cout, " "));
-
-    alternatingSeries->push_back(series[0]);
-    int in = mask[0];
-    for(std::vector<int>::const_iterator itSeries = series.begin(), itSeries != series.end(), ++itSeries) {
-        if() {}
-    } */
 
 void ReadSeries(std::vector<int>* series) {
     size_t size;
