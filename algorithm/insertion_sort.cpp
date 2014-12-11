@@ -3,27 +3,20 @@
 #include <utility>
 #include <vector>
 
-
+// ------------------------------------------------------------------------------------------------
 template<typename RandomAccessIterator>
-size_t GetIndexMinimum(RandomAccessIterator begin, RandomAccessIterator end) {
-    typedef typename std::iterator_traits<RandomAccessIterator>::value_type T;
-    T minimum = *begin;
-    size_t indexMinimum = 0;
-    for (RandomAccessIterator it = begin + 1; it < end; ++it) {
-        if (*it < minimum) {
-            minimum = *it;
-            indexMinimum = it - begin;
+void Insert(RandomAccessIterator begin, RandomAccessIterator current) {
+    for (RandomAccessIterator it = current; it > begin; --it) {
+        if (*(it - 1) > *it) {
+            std::swap(*(it - 1), *it);
         }
     }
-    return indexMinimum;
 }
-
 template<typename RandomAccessIterator>
-void SelectionSort(RandomAccessIterator begin, RandomAccessIterator end) {
+void InsertionSort(RandomAccessIterator begin, RandomAccessIterator end) {
     for (RandomAccessIterator it = begin; it < end; ++it) {
-        size_t indexMinimum = GetIndexMinimum(it, end);
-        std::swap(*it, *(it + indexMinimum));
-    } 
+        Insert(begin, it);
+    }
 }
 
 int main(int argc, char const *argv[]) {
@@ -34,7 +27,7 @@ int main(int argc, char const *argv[]) {
     for (std::vector<int>::iterator itElem = sequence.begin(); itElem < sequence.end(); ++itElem) {
         std::cin >> *itElem;
     }
-    SelectionSort(sequence.begin(), sequence.end());
+    InsertionSort(sequence.begin(), sequence.end());
     std::copy(sequence.begin(), sequence.end(), std::ostream_iterator<int>(std::cout, " "));
     return 0;
 }
