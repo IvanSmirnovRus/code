@@ -1,7 +1,7 @@
 #include <iostream>
 #include <algorithm>
 #include <vector>
-// ------------------------------------------------------------------------------------------------
+
 
 template<typename RandomAccessIterator>
 void Merge(RandomAccessIterator beginFirst, RandomAccessIterator endFirst,
@@ -31,17 +31,4 @@ void MergeSort(RandomAccessIterator begin, RandomAccessIterator end) {
             Merge(it, it + blockSize, it + blockSize, endBlock);
         }
     }
-}
-
-int main(int argc, char const *argv[]) {
-    int sequenceSize;
-    std::cin >> sequenceSize;
-    std::vector<int> sequence;
-    sequence.resize(sequenceSize);
-    for (std::vector<int>::iterator itElem = sequence.begin(); itElem < sequence.end(); ++itElem) {
-        std::cin >> *itElem;
-    }
-    MergeSort(sequence.begin(), sequence.end());
-    std::copy(sequence.begin(), sequence.end(), std::ostream_iterator<int>(std::cout, " "));
-    return 0;
 }
