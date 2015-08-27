@@ -40,6 +40,6 @@ int main(int argc, char const *argv[]) {
             lisMax = lisLength[cubesCounterFirst];
         }
     }
-    std::cout << lisMax << std::endl;
+    std::cout << lisMax << std::endl; 
     return 0;
 }
