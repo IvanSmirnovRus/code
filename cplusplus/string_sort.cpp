@@ -15,11 +15,12 @@ bool CompareStrings(const std::string& str1, const std::string& str2) {
     }
     size_t firstNumberLength = str1.length() - firstBeginPos;
     size_t secondNumberLength = str2.length() - secondBeginPos;
-    return firstNumberLength == secondNumberLength ?
-           str1.c_str() + firstBeginPos < str2.c_str() + secondBeginPos :
-           firstNumberLength < secondNumberLength;
 
+    return firstNumberLength == secondNumberLength ? 
+    ((str1.compare(firstBeginPos, str1.length(), str2, secondBeginPos,  str2.length())) <= 0) :
+    firstNumberLength < secondNumberLength;
 }
+
 void ReadStrings(std::vector<std::string>* strings) {
     std::string s;
     while(std::cin >> s) {
