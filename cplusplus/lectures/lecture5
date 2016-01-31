@@ -1,0 +1,73 @@
+struct и class отличаются уровнем доступа по-умолчанию, в class - private, в struct - public
+struct TPoint {
+	private:
+		double X, Y;
+};
+TPoint p;
+p.X = 0.0; - ошибка, так как будет private
+private только из внутренних методов, даже до свойств других объектов этого класса, например перегрузка оператора + то, мы имеем доступ до private полей аргумента
+
+
+template<typename T>
+class TVector {
+	T *Data;
+	size_t size;
+	size_t capacity;
+public:
+	operator []....
+	.....
+}
+
+Наследование
+class TAnimal {
+	public:
+		size_t GetLegCount() const;
+		void Cry() const;
+};
+
+class TCat : public TAnimal { - public наследовани,  меняет доступ до методов и свойств  родительского класса, мы не можем использовать private свойства. 
+	public:
+		void Mur() const;
+	private:
+		using  Cry(); - закрываем pulic метод родителя
+};
+private наследование - значит класс реализован через
+например
+class TAnimal: private std::vector { - 
+	....;
+}
+
+void Walk(TAnimal &a) {
+	a.Run(); -  вызовем методы TAnimal
+	a.Cry();
+}
+
+нужно добавить к методам родительского класса virtual 
+и тогда если вызвать Run, то вызовется Run того класса, который передается в функцию
+
+
+class TAnimal {
+	public:
+		 virtual void Run() {
+			std::cout << "TAnimal::Run()" << std::endl;
+		}
+};
+
+class TCat : public TAnimal {
+	public:
+		void Run() {
+			std::cout << "TCat:Run()" << std::endl;
+		}
+};
+
+
+class TBlackCat : public TAnimal {
+	public:
+		void Run() {
+			std::cout << "TBlackCat:Run()" << std::endl;
+	}
+};
+
+void Walk(TAnimal &animal) {
+	animal.Run();
+} 

@@ -1,0 +1,66 @@
+struct TPoint {
+	float x;
+	float y;
+};
+TPoint p;
+p.x = p.y = 0.0;
+std::cout << p.x;
+
+TPoint FindAverage(
+	const std::vector<TPoint> &p) {
+	Tpoint res;
+	res.x=res.y=0.0;
+	for (i....) {
+		res.x += p[i].x;
+		res.y += p[i].y;
+	}
+}
+
+Чтобы не инициализировать нулями, напишим конструктор
+struct TPoint {
+	float X, Y;
+	
+	TPoint () {
+		X=Y=0.0; Лишнее копирование, сначала создается X Y c мусором, а потом заполняется
+	}
+	
+	TPoint(const TPoint &p) : X(p.X), Y(p.Y) {} конструктор копирования
+
+	TPoint (float x, float y)
+		: X(x), Y(y) Без лишнего копирования
+	{}
+
+	TPoint &operator += (const TPoint &rst) {
+		X += rgt.X; // или так this->X += rgt.X;
+		Y += rgt.Y; // или так (*this).Y += rgt.Y;
+		return *this;
+	}
+	void Print() const {  Делает this константным и this.X тоже
+		std::cout << this->X << " " << Y << std::endl;
+	}
+	~TPoint () {
+	}
+
+	TPoint &operator = (const TPoint &rgt) {
+		X = rgt.X;
+		Y = rgt.Y;
+		return *this;
+	}
+
+	Так правильнее сначала выделяем память потом делаем Swap - его нужно реализовать, нужно чтобы обрабатывать ошибки выделения памяти до копирования
+	TPoint &operator = (const TPoint &rgt) {
+		TPoint tmp(rgt);
+		tmp.Swap(*this);
+		return *this;
+	}
+};
+
+Можно снаружи описать оператор
+TPoint operatorn + (const TPoint &a, const TPoint &b) {
+	TPoint tmp(a);
+	tmp += b;
+	return tmp;
+}
+TPoint operator + (TPoint a, const TPoint &b) {
+	return (a += b);
+}

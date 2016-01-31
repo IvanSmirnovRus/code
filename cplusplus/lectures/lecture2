@@ -1,0 +1,47 @@
+#include <iostream>
+
+struct A {
+	A &operator ++ () {
+		std::cout << "Prefix form!" << std::endl;
+		return *this;
+	}
+
+	A operator ++ (int) { 
+		std::cout << "Postfix form!" << std::endl;
+		A t(*this);
+		++(*this);
+		return t;
+	}
+};
+int main(int argc, char const *argv[])
+{	
+	A a;
+	++a;
+	a++;
+	return 0;
+}
+
+int a = 1;
+const int &b = a;
+std::cout << b;
+b = 2;// не работает, потому что константная
+
+void Foo(const vector<int> &v) { //передаем поссылки и вектор не копируется и не меняем
+	
+}
+
+void Foo(vector<int> &v) { //передаем поссылки и вектор не копируется и меняем
+	
+}
+
+int *c = &a;
+одно и тоже указатель на константу, нельзя так *f = 7;
+const int* d = &a; 
+int const* f =&a;
+
+Константный указательн, нельзя так f = d;
+
+int * const e = &a;
+
+Ничего нельзя
+const int * const g = &a;  

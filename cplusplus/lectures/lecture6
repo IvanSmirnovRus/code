@@ -1,0 +1,53 @@
+template <typename T> 
+T max(const T& a, const T& b) {
+	return a>=b ? a : b;
+}
+
+template <size_t k> //k - должно быть известно во время компиляции
+void Magic() {
+	std::cout << "Hi, I'm generic Magic" << k << std::endl;
+}
+
+template <size_t k>
+void Magic<0>() {
+	std::cout << "Hi, I'm generic Magic" << std::endl;
+}
+
+int main() {
+	Magic<3>(); вызываем строку 7
+	Magic<0>(); вызываем строку 12
+
+}
+
+
+template <typename A = std::allocator<bool>>
+class vector<bool, A> {
+	
+};
+
+template<size_t N>
+struct TFactorial {
+	static const size_t Result = TFactorial<N-1>::Result * N;	
+};
+
+template<>
+struct TFactorial<0> {
+	static const size_t Result = 1;
+}
+
+template<size_t N, size_t K>
+struct TCombinations {
+	static const size_t Result = 
+		TCombinations<N-1, K-1>::Result +
+		TCombinations<N-1, K>::Result;
+}
+
+template<size_t N>
+struct TCombinations<N, 0> {
+	static const size_t Result = 1;
+}
+
+template<size_t N>
+struct TCombinations<N, N> {
+	static const size_t Result = 1;
+} 
